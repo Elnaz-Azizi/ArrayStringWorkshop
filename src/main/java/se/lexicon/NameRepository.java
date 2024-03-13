@@ -69,10 +69,26 @@ matches.*/
         }
         return matches;
     }
-    /* public static boolean update(final String original, final String updatedName)
-Should find a name and replace it with new fullName if available. Returns true if name was found and updated
+    /* Should find a name and replace it with new fullName if available. Returns true if name was found and updated
 with the new name. False if name could not be updated because name wasn’t found or name was found but an
 existing name matching the updatedName already exists */
 
+    public static boolean update(final String original, final String updatedName) {
+        int index = -1;
+        for (int i = 0; i < names.length; i++) {
+            if (names[i].equals(original)) {
+                index = i;
+                break;
+            }
+        }
+       if (index == -1) {
+           return false;
+       }
+       if (find(updatedName) !=null && !updatedName.equals(original)) {
+           return false;
+       }
+       names[index]= updatedName;
+       return true;
+    }
 
 }//class
