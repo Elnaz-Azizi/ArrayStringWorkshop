@@ -114,7 +114,7 @@ existing name matching the updatedName already exists */
     }
 
 
-    private static int findIndex (String fullName){
+    private static int findIndex(String fullName) {
         int index = -1;
         for (int i = 0; i < names.length; i++) {
             if (names[i].equalsIgnoreCase(fullName)) {
