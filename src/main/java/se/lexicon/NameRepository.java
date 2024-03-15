@@ -42,8 +42,7 @@ public class NameRepository {
         return true;
     }
 
-    /* public static String[] findByFirstName(final String firstName)
-Searches the array trying to find all names that has passed in first name. Returns a String array containing all
+    /* Searches the array trying to find all names that has passed in first name. Returns a String array containing all
 matches.*/
     public static String[] findByFirstName(final String firstName) {
         String[] matches = new String[0];
@@ -55,8 +54,7 @@ matches.*/
         }
         return matches;
     }
-    /*public static String[] findByLastName(final String lastName)
-Searches the array trying to find all names that has passed in last name. Returns a String array containing all
+    /* Searches the array trying to find all names that has passed in last name. Returns a String array containing all
 matches.*/
 
     public static String[] findByLastName(final String lastName) {
@@ -81,14 +79,52 @@ existing name matching the updatedName already exists */
                 break;
             }
         }
-       if (index == -1) {
-           return false;
-       }
-       if (find(updatedName) !=null && !updatedName.equals(original)) {
-           return false;
-       }
-       names[index]= updatedName;
-       return true;
+        if (index == -1) {
+            return false;
+        }
+        if (find(updatedName) != null && !updatedName.equals(original)) {
+            return false;
+        }
+        names[index] = updatedName;
+        return true;
+    }
+
+    // Should remove a name from the array. Returns true if name was removed and false if the name was not removed for some reason.
+    public static boolean remove(final String fullName) {
+        /*int findIndex = -1;
+        for (int i = 0; i < names.length; i++) {
+            if (names[i].equalsIgnoreCase(fullName)) {
+                findIndex = i;
+                break;
+            }
+        }*/
+        int index = findIndex(fullName);
+        if (index == -1) {
+            return false;
+        }
+        String[] newArray = new String[names.length - 1];
+        int indexNewArray = 0;
+        for (int i = 0; i < names.length; i++) {
+            if (i != index) continue;
+            newArray[indexNewArray] = names[i];
+            indexNewArray++;
+        }
+        names = Arrays.copyOf(newArray, newArray.length);
+        return true;
+    }
+
+
+    private static int findIndex (String fullName){
+        int index = -1;
+        for (int i = 0; i < names.length; i++) {
+            if (names[i].equalsIgnoreCase(fullName)) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
+
     }
 
 }//class
